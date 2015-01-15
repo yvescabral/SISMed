@@ -1,0 +1,57 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="SISMed.Site" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title><%: Page.Title %> · SISMed</title>
+    <link href="http://fonts.googleapis.com/css?family=Varela+Round:400" rel="stylesheet" />
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" />
+    <link href="/content/css/normalize.css" rel="stylesheet" />
+    <link href="/content/css/boilerplate.css" rel="stylesheet" />
+    <link href="/content/css/font-awesome.css" rel="stylesheet" />
+    <link href="/content/css/main.css" rel="stylesheet" />
+    <link href="/content/css/grid.css" rel="stylesheet" />
+    <script src="/scripts/jquery-1.10.2.min.js"></script>
+    <script src="/scripts/modernizr-2.6.2.min.js"></script>
+    <script src="/scripts/main.js"></script>
+    <script src="/scripts/plugins.js"></script>
+    <asp:ContentPlaceHolder runat="server" ID="HeadContent" />
+</head>
+<body>
+    <form id="form1" class="content" runat="server">
+        <header class="header">
+            <section class="user section">
+                <%= Session["UsuarioNome"] %>
+                <asp:HyperLink NavigateUrl="~/Usuario/Default.aspx" runat="server"><i class="action fa fa-pencil-square"></i></asp:HyperLink>
+            </section>
+            <section class="toolbar section">
+                <menu>
+                    <% if (!string.IsNullOrWhiteSpace(Session["TipoDeUsuarioId"].ToString()) && Session["TipoDeUsuarioId"].ToString() == "4")
+                       { %>
+                    <a class="greener" href="/Administracao/Usuarios/Default.aspx">
+                        <span class="icon at-left fa fa-gears"></span>
+                        <span class="text">Administração do Sistema</span>
+                    </a>
+                    <% } %>
+                    <div class="align right">
+                        <a class="light-green">SISMed</a><asp:LinkButton ID="btnLogout" CssClass="greenish" Text="<span class='text'>Sair</span> <span class='icon fa fa-sign-out'></span>" runat="server" OnClick="btnLogout_Click" /></div>
+                </menu>
+            </section>
+        </header>
+        <section class="body">
+            <asp:Menu ID="Menu" runat="server" DataSourceID="smdsMenu"
+                StaticDisplayLevels="1" MaximumDynamicDisplayLevels="0" IncludeStyleBlock="false"
+                StaticSubMenuIndent="5px" CssClass="normal sidebar section" 
+                SkipLinkText="" onmenuitemdatabound="Menu_MenuItemDataBound">
+            </asp:Menu>
+            <asp:SiteMapDataSource ID="smdsMenu" ShowStartingNode="false" runat="server" />
+            <div class="section overflow">
+                <asp:ContentPlaceHolder runat="server" ID="MainContent" />
+            </div>
+        </section>
+    </form>
+</body>
+</html>

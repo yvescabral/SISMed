@@ -1,0 +1,877 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SISMed.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="SISMedStoreContainer">
+    <EntitySet Name="Solicitacoes" EntityType="SISMed.Store.Solicitacoes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Pessoas" EntityType="SISMed.Store.Pessoas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Medicos" EntityType="SISMed.Store.Medicos" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="HorariosDeAtendimento" EntityType="SISMed.Store.HorariosDeAtendimento" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TiposDeUsuario" EntityType="SISMed.Store.TiposDeUsuario" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DiasDaSemana" EntityType="SISMed.Store.DiasDaSemana" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EstadosCivis" EntityType="SISMed.Store.EstadosCivis" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Consultas" EntityType="SISMed.Store.Consultas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Medicacoes" EntityType="SISMed.Store.Medicacoes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Agendamentos" EntityType="SISMed.Store.Agendamentos" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Pessoas_Usuario" EntityType="SISMed.Store.Pessoas_Usuario" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Pessoas_Paciente" EntityType="SISMed.Store.Pessoas_Paciente" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="SolicitacaoUsuario" Association="SISMed.Store.SolicitacaoUsuario">
+      <End Role="Solicitacao" EntitySet="Solicitacoes" />
+      <End Role="Usuario" EntitySet="Pessoas_Usuario" />
+    </AssociationSet>
+    <AssociationSet Name="HorarioDeAtendimentoMedico" Association="SISMed.Store.HorarioDeAtendimentoMedico">
+      <End Role="HorarioDeAtendimento" EntitySet="HorariosDeAtendimento" />
+      <End Role="Medico" EntitySet="Medicos" />
+    </AssociationSet>
+    <AssociationSet Name="TipoDeUsuarioUsuario" Association="SISMed.Store.TipoDeUsuarioUsuario">
+      <End Role="TipoDeUsuario" EntitySet="TiposDeUsuario" />
+      <End Role="Usuario" EntitySet="Pessoas_Usuario" />
+    </AssociationSet>
+    <AssociationSet Name="MedicoUsuario" Association="SISMed.Store.MedicoUsuario">
+      <End Role="Medico" EntitySet="Medicos" />
+      <End Role="Usuario" EntitySet="Pessoas_Usuario" />
+    </AssociationSet>
+    <AssociationSet Name="DiaDaSemanaHorarioDeAtendimento" Association="SISMed.Store.DiaDaSemanaHorarioDeAtendimento">
+      <End Role="DiaDaSemana" EntitySet="DiasDaSemana" />
+      <End Role="HorarioDeAtendimento" EntitySet="HorariosDeAtendimento" />
+    </AssociationSet>
+    <AssociationSet Name="PessoaEstadoCivil" Association="SISMed.Store.PessoaEstadoCivil">
+      <End Role="Pessoa" EntitySet="Pessoas" />
+      <End Role="EstadoCivil" EntitySet="EstadosCivis" />
+    </AssociationSet>
+    <AssociationSet Name="ConsultaMedicacao" Association="SISMed.Store.ConsultaMedicacao">
+      <End Role="Consulta" EntitySet="Consultas" />
+      <End Role="Medicacao" EntitySet="Medicacoes" />
+    </AssociationSet>
+    <AssociationSet Name="MedicoConsulta" Association="SISMed.Store.MedicoConsulta">
+      <End Role="Medico" EntitySet="Medicos" />
+      <End Role="Consulta" EntitySet="Consultas" />
+    </AssociationSet>
+    <AssociationSet Name="PacienteConsulta" Association="SISMed.Store.PacienteConsulta">
+      <End Role="Paciente" EntitySet="Pessoas_Paciente" />
+      <End Role="Consulta" EntitySet="Consultas" />
+    </AssociationSet>
+    <AssociationSet Name="MedicoAgendamento" Association="SISMed.Store.MedicoAgendamento">
+      <End Role="Medico" EntitySet="Medicos" />
+      <End Role="Agendamento" EntitySet="Agendamentos" />
+    </AssociationSet>
+    <AssociationSet Name="PacienteAgendamento" Association="SISMed.Store.PacienteAgendamento">
+      <End Role="Paciente" EntitySet="Pessoas_Paciente" />
+      <End Role="Agendamento" EntitySet="Agendamentos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Usuario_inherits_Pessoa" Association="SISMed.Store.FK_Usuario_inherits_Pessoa">
+      <End Role="Pessoa" EntitySet="Pessoas" />
+      <End Role="Usuario" EntitySet="Pessoas_Usuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Paciente_inherits_Pessoa" Association="SISMed.Store.FK_Paciente_inherits_Pessoa">
+      <End Role="Pessoa" EntitySet="Pessoas" />
+      <End Role="Paciente" EntitySet="Pessoas_Paciente" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Solicitacoes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DataHora" Type="datetime" Nullable="false" />
+    <Property Name="Descricao" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Resolvido" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="UsuarioId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Pessoas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Sobrenome" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="CPF" Type="nchar" Nullable="false" MaxLength="14" />
+    <Property Name="RG" Type="nchar" Nullable="false" MaxLength="11" />
+    <Property Name="Sexo" Type="nchar" Nullable="false" MaxLength="1" />
+    <Property Name="TelefoneCelular" Type="nvarchar" Nullable="false" MaxLength="15" />
+    <Property Name="TelefoneResidencial" Type="nvarchar" Nullable="false" MaxLength="15" />
+    <Property Name="EstadoCivilId" Type="int" Nullable="false" />
+    <Property Name="DataNascimento" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Medicos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Usuario_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HorariosDeAtendimento">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HoraInicio" Type="time" Nullable="false" />
+    <Property Name="HoraFim" Type="time" Nullable="false" />
+    <Property Name="MedicoId" Type="int" Nullable="false" />
+    <Property Name="DiaDaSemanaId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TiposDeUsuario">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="nvarchar" Nullable="false" MaxLength="25" />
+  </EntityType>
+  <EntityType Name="DiasDaSemana">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EstadosCivis">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Consultas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Queixas" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Diagnostico" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DataHora" Type="datetime" Nullable="false" />
+    <Property Name="MedicoId" Type="int" Nullable="false" />
+    <Property Name="PacienteId" Type="int" Nullable="false" />
+    <Property Name="Peso" Type="decimal" Nullable="false" Precision="5" Scale="2" />
+    <Property Name="Altura" Type="decimal" Nullable="false" Precision="3" Scale="2" />
+  </EntityType>
+  <EntityType Name="Medicacoes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="nvarchar" Nullable="false" MaxLength="40" />
+    <Property Name="Quantidade" Type="nvarchar" Nullable="false" MaxLength="15" />
+    <Property Name="ConsultaId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Agendamentos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Horario" Type="datetime" Nullable="false" />
+    <Property Name="MedicoId" Type="int" Nullable="false" />
+    <Property Name="PacienteId" Type="int" Nullable="false" />
+    <Property Name="Ativo" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Pessoas_Usuario">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Senha" Type="nchar" Nullable="false" MaxLength="128" />
+    <Property Name="TipoDeUsuarioId" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Pessoas_Paciente">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="TipoSanguineo" Type="nvarchar" Nullable="false" MaxLength="2" />
+    <Property Name="FatorRh" Type="bit" Nullable="false" />
+    <Property Name="Alergias" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="SolicitacaoUsuario">
+    <End Role="Solicitacao" Type="SISMed.Store.Solicitacoes" Multiplicity="*" />
+    <End Role="Usuario" Type="SISMed.Store.Pessoas_Usuario" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Solicitacao">
+        <PropertyRef Name="UsuarioId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="HorarioDeAtendimentoMedico">
+    <End Role="HorarioDeAtendimento" Type="SISMed.Store.HorariosDeAtendimento" Multiplicity="*" />
+    <End Role="Medico" Type="SISMed.Store.Medicos" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Medico">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HorarioDeAtendimento">
+        <PropertyRef Name="MedicoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TipoDeUsuarioUsuario">
+    <End Role="TipoDeUsuario" Type="SISMed.Store.TiposDeUsuario" Multiplicity="1" />
+    <End Role="Usuario" Type="SISMed.Store.Pessoas_Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoDeUsuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="TipoDeUsuarioId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MedicoUsuario">
+    <End Role="Medico" Type="SISMed.Store.Medicos" Multiplicity="*" />
+    <End Role="Usuario" Type="SISMed.Store.Pessoas_Usuario" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Medico">
+        <PropertyRef Name="Usuario_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DiaDaSemanaHorarioDeAtendimento">
+    <End Role="DiaDaSemana" Type="SISMed.Store.DiasDaSemana" Multiplicity="1" />
+    <End Role="HorarioDeAtendimento" Type="SISMed.Store.HorariosDeAtendimento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DiaDaSemana">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HorarioDeAtendimento">
+        <PropertyRef Name="DiaDaSemanaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PessoaEstadoCivil">
+    <End Role="Pessoa" Type="SISMed.Store.Pessoas" Multiplicity="*" />
+    <End Role="EstadoCivil" Type="SISMed.Store.EstadosCivis" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="EstadoCivil">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Pessoa">
+        <PropertyRef Name="EstadoCivilId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ConsultaMedicacao">
+    <End Role="Consulta" Type="SISMed.Store.Consultas" Multiplicity="1" />
+    <End Role="Medicacao" Type="SISMed.Store.Medicacoes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Consulta">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Medicacao">
+        <PropertyRef Name="ConsultaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MedicoConsulta">
+    <End Role="Medico" Type="SISMed.Store.Medicos" Multiplicity="1" />
+    <End Role="Consulta" Type="SISMed.Store.Consultas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Medico">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Consulta">
+        <PropertyRef Name="MedicoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PacienteConsulta">
+    <End Role="Paciente" Type="SISMed.Store.Pessoas_Paciente" Multiplicity="1" />
+    <End Role="Consulta" Type="SISMed.Store.Consultas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Paciente">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Consulta">
+        <PropertyRef Name="PacienteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MedicoAgendamento">
+    <End Role="Medico" Type="SISMed.Store.Medicos" Multiplicity="1" />
+    <End Role="Agendamento" Type="SISMed.Store.Agendamentos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Medico">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Agendamento">
+        <PropertyRef Name="MedicoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PacienteAgendamento">
+    <End Role="Paciente" Type="SISMed.Store.Pessoas_Paciente" Multiplicity="1" />
+    <End Role="Agendamento" Type="SISMed.Store.Agendamentos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Paciente">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Agendamento">
+        <PropertyRef Name="PacienteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Usuario_inherits_Pessoa">
+    <End Role="Pessoa" Type="SISMed.Store.Pessoas" Multiplicity="1" />
+    <End Role="Usuario" Type="SISMed.Store.Pessoas_Usuario" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Pessoa">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Paciente_inherits_Pessoa">
+    <End Role="Pessoa" Type="SISMed.Store.Pessoas" Multiplicity="1" />
+    <End Role="Paciente" Type="SISMed.Store.Pessoas_Paciente" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Pessoa">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Paciente">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SISMed" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="SISMedEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="Solicitacoes" EntityType="SISMed.Solicitacao" />
+          <EntitySet Name="Pessoas" EntityType="SISMed.Pessoa" />
+          <AssociationSet Name="SolicitacaoUsuario" Association="SISMed.SolicitacaoUsuario">
+            <End Role="Solicitacao" EntitySet="Solicitacoes" />
+            <End Role="Usuario" EntitySet="Pessoas" />
+          </AssociationSet>
+          <EntitySet Name="Medicos" EntityType="SISMed.Medico" />
+          <EntitySet Name="HorariosDeAtendimento" EntityType="SISMed.HorarioDeAtendimento" />
+          <AssociationSet Name="HorarioDeAtendimentoMedico" Association="SISMed.HorarioDeAtendimentoMedico">
+            <End Role="HorarioDeAtendimento" EntitySet="HorariosDeAtendimento" />
+            <End Role="Medico" EntitySet="Medicos" />
+          </AssociationSet>
+          <EntitySet Name="TiposDeUsuario" EntityType="SISMed.TipoDeUsuario" />
+          <AssociationSet Name="TipoDeUsuarioUsuario" Association="SISMed.TipoDeUsuarioUsuario">
+            <End Role="TipoDeUsuario" EntitySet="TiposDeUsuario" />
+            <End Role="Usuario" EntitySet="Pessoas" />
+          </AssociationSet>
+          <AssociationSet Name="MedicoUsuario" Association="SISMed.MedicoUsuario">
+            <End Role="Medico" EntitySet="Medicos" />
+            <End Role="Usuario" EntitySet="Pessoas" />
+          </AssociationSet>
+          <EntitySet Name="DiasDaSemana" EntityType="SISMed.DiaDaSemana" />
+          <AssociationSet Name="DiaDaSemanaHorarioDeAtendimento" Association="SISMed.DiaDaSemanaHorarioDeAtendimento">
+            <End Role="DiaDaSemana" EntitySet="DiasDaSemana" />
+            <End Role="HorarioDeAtendimento" EntitySet="HorariosDeAtendimento" />
+          </AssociationSet>
+          <EntitySet Name="EstadosCivis" EntityType="SISMed.EstadoCivil" />
+          <AssociationSet Name="PessoaEstadoCivil" Association="SISMed.PessoaEstadoCivil">
+            <End Role="Pessoa" EntitySet="Pessoas" />
+            <End Role="EstadoCivil" EntitySet="EstadosCivis" />
+          </AssociationSet>
+          <EntitySet Name="Consultas" EntityType="SISMed.Consulta" />
+          <EntitySet Name="Medicacoes" EntityType="SISMed.Medicacao" />
+          <AssociationSet Name="ConsultaMedicacao" Association="SISMed.ConsultaMedicacao">
+            <End Role="Consulta" EntitySet="Consultas" />
+            <End Role="Medicacao" EntitySet="Medicacoes" />
+          </AssociationSet>
+          <AssociationSet Name="MedicoConsulta" Association="SISMed.MedicoConsulta">
+            <End Role="Medico" EntitySet="Medicos" />
+            <End Role="Consulta" EntitySet="Consultas" />
+          </AssociationSet>
+          <AssociationSet Name="PacienteConsulta" Association="SISMed.PacienteConsulta">
+            <End Role="Paciente" EntitySet="Pessoas" />
+            <End Role="Consulta" EntitySet="Consultas" />
+          </AssociationSet>
+          <EntitySet Name="Agendamentos" EntityType="SISMed.Agendamento" />
+          <AssociationSet Name="MedicoAgendamento" Association="SISMed.MedicoAgendamento">
+            <End Role="Medico" EntitySet="Medicos" />
+            <End Role="Agendamento" EntitySet="Agendamentos" />
+          </AssociationSet>
+          <AssociationSet Name="PacienteAgendamento" Association="SISMed.PacienteAgendamento">
+            <End Role="Paciente" EntitySet="Pessoas" />
+            <End Role="Agendamento" EntitySet="Agendamentos" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Solicitacao">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="DataHora" annotation:StoreGeneratedPattern="None" Nullable="false" />
+          <Property Type="String" Name="Descricao" Nullable="false" MaxLength="Max" Unicode="true" />
+          <Property Name="Resolvido" Type="Boolean" Nullable="false" DefaultValue="false" />
+          <NavigationProperty Name="Usuario" Relationship="SISMed.SolicitacaoUsuario" FromRole="Solicitacao" ToRole="Usuario" />
+          <Property Name="UsuarioId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario" BaseType="SISMed.Pessoa">
+          <NavigationProperty Name="Solicitacao" Relationship="SISMed.SolicitacaoUsuario" FromRole="Usuario" ToRole="Solicitacao" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" />
+          <Property Name="Senha" Type="String" Nullable="false" MaxLength="128" FixedLength="true" />
+          <NavigationProperty Name="TipoDeUsuario" Relationship="SISMed.TipoDeUsuarioUsuario" FromRole="Usuario" ToRole="TipoDeUsuario" />
+          <Property Name="TipoDeUsuarioId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pessoa">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="50" />
+          <Property Name="Sobrenome" Type="String" Nullable="false" MaxLength="50" />
+          <Property Name="CPF" Type="String" Nullable="false" MaxLength="14" FixedLength="true" />
+          <Property Name="RG" Type="String" Nullable="false" FixedLength="true" MaxLength="11" />
+          <Property Name="Sexo" Type="String" Nullable="false" MaxLength="1" FixedLength="true" />
+          <Property Name="TelefoneCelular" Type="String" Nullable="false" MaxLength="15" />
+          <Property Name="TelefoneResidencial" Type="String" Nullable="false" MaxLength="15" />
+          <NavigationProperty Name="EstadoCivil" Relationship="SISMed.PessoaEstadoCivil" FromRole="Pessoa" ToRole="EstadoCivil" />
+          <Property Name="EstadoCivilId" Type="Int32" Nullable="false" />
+          <Property Name="DataNascimento" Type="DateTime" Nullable="false" />
+          </EntityType>
+        <Association Name="SolicitacaoUsuario">
+          <End Type="SISMed.Solicitacao" Role="Solicitacao" Multiplicity="*" />
+          <End Type="SISMed.Usuario" Role="Usuario" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Solicitacao">
+              <PropertyRef Name="UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Paciente" BaseType="SISMed.Pessoa" >
+          <Property Name="TipoSanguineo" Type="String" Nullable="false" MaxLength="2" />
+          <Property Name="FatorRh" Type="Boolean" Nullable="false" />
+          <Property Name="Alergias" Type="String" Nullable="false" MaxLength="Max" />
+          <NavigationProperty Name="Consultas" Relationship="SISMed.PacienteConsulta" FromRole="Paciente" ToRole="Consulta" />
+          <NavigationProperty Name="Agendamentos" Relationship="SISMed.PacienteAgendamento" FromRole="Paciente" ToRole="Agendamento" />
+        </EntityType>
+        <EntityType Name="Medico">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="HorariosDeAtendimento" Relationship="SISMed.HorarioDeAtendimentoMedico" FromRole="Medico" ToRole="HorarioDeAtendimento" />
+          <NavigationProperty Name="Usuario" Relationship="SISMed.MedicoUsuario" FromRole="Medico" ToRole="Usuario" />
+          <NavigationProperty Name="Consultas" Relationship="SISMed.MedicoConsulta" FromRole="Medico" ToRole="Consulta" />
+          <NavigationProperty Name="Agendamentos" Relationship="SISMed.MedicoAgendamento" FromRole="Medico" ToRole="Agendamento" />
+        </EntityType>
+        <EntityType Name="HorarioDeAtendimento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Medico" Relationship="SISMed.HorarioDeAtendimentoMedico" FromRole="HorarioDeAtendimento" ToRole="Medico" />
+          <Property Name="HoraInicio" Type="Time" Nullable="false" />
+          <Property Name="HoraFim" Type="Time" Nullable="false" />
+          <Property Name="MedicoId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DiaDaSemana" Relationship="SISMed.DiaDaSemanaHorarioDeAtendimento" FromRole="HorarioDeAtendimento" ToRole="DiaDaSemana" />
+          <Property Name="DiaDaSemanaId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="HorarioDeAtendimentoMedico">
+          <End Type="SISMed.HorarioDeAtendimento" Role="HorarioDeAtendimento" Multiplicity="*" />
+          <End Type="SISMed.Medico" Role="Medico" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Medico">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HorarioDeAtendimento">
+              <PropertyRef Name="MedicoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TipoDeUsuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="25" />
+          <NavigationProperty Name="Usuarios" Relationship="SISMed.TipoDeUsuarioUsuario" FromRole="TipoDeUsuario" ToRole="Usuario" />
+        </EntityType>
+        <Association Name="TipoDeUsuarioUsuario">
+          <End Type="SISMed.TipoDeUsuario" Role="TipoDeUsuario" Multiplicity="1" />
+          <End Type="SISMed.Usuario" Role="Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDeUsuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="TipoDeUsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MedicoUsuario">
+          <End Type="SISMed.Medico" Role="Medico" Multiplicity="0..1" />
+          <End Type="SISMed.Usuario" Role="Usuario" Multiplicity="1" />
+        </Association>
+        <EntityType Name="DiaDaSemana">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" Nullable="false" />
+          <NavigationProperty Name="HorariosDeAtendimento" Relationship="SISMed.DiaDaSemanaHorarioDeAtendimento" FromRole="DiaDaSemana" ToRole="HorarioDeAtendimento" />
+        </EntityType>
+        <Association Name="DiaDaSemanaHorarioDeAtendimento">
+          <End Type="SISMed.DiaDaSemana" Role="DiaDaSemana" Multiplicity="1" />
+          <End Type="SISMed.HorarioDeAtendimento" Role="HorarioDeAtendimento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DiaDaSemana">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HorarioDeAtendimento">
+              <PropertyRef Name="DiaDaSemanaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="EstadoCivil">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" Nullable="false" />
+          <NavigationProperty Name="Pessoas" Relationship="SISMed.PessoaEstadoCivil" FromRole="EstadoCivil" ToRole="Pessoa" />
+        </EntityType>
+        <Association Name="PessoaEstadoCivil">
+          <End Type="SISMed.Pessoa" Role="Pessoa" Multiplicity="*" />
+          <End Type="SISMed.EstadoCivil" Role="EstadoCivil" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoCivil">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pessoa">
+              <PropertyRef Name="EstadoCivilId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Consulta">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Queixas" Nullable="false" />
+          <Property Type="String" Name="Diagnostico" Nullable="false" />
+          <Property Type="DateTime" Name="DataHora" Nullable="false" />
+          <NavigationProperty Name="Medicacoes" Relationship="SISMed.ConsultaMedicacao" FromRole="Consulta" ToRole="Medicacao" />
+          <NavigationProperty Name="Medico" Relationship="SISMed.MedicoConsulta" FromRole="Consulta" ToRole="Medico" />
+          <Property Type="Int32" Name="MedicoId" Nullable="false" />
+          <NavigationProperty Name="Paciente" Relationship="SISMed.PacienteConsulta" FromRole="Consulta" ToRole="Paciente" />
+          <Property Type="Int32" Name="PacienteId" Nullable="false" />
+          <Property Name="Peso" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="Altura" Type="Decimal" Nullable="false" Precision="3" Scale="2" />
+        </EntityType>
+        <EntityType Name="Medicacao">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Nome" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="Quantidade" Nullable="false" MaxLength="15" />
+          <NavigationProperty Name="Consulta" Relationship="SISMed.ConsultaMedicacao" FromRole="Medicacao" ToRole="Consulta" />
+          <Property Type="Int32" Name="ConsultaId" Nullable="false" />
+        </EntityType>
+        <Association Name="ConsultaMedicacao">
+          <End Type="SISMed.Consulta" Role="Consulta" Multiplicity="1" />
+          <End Type="SISMed.Medicacao" Role="Medicacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Consulta">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Medicacao">
+              <PropertyRef Name="ConsultaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MedicoConsulta">
+          <End Type="SISMed.Medico" Role="Medico" Multiplicity="1" />
+          <End Type="SISMed.Consulta" Role="Consulta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medico">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Consulta">
+              <PropertyRef Name="MedicoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PacienteConsulta">
+          <End Type="SISMed.Paciente" Role="Paciente" Multiplicity="1" />
+          <End Type="SISMed.Consulta" Role="Consulta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paciente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Consulta">
+              <PropertyRef Name="PacienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Agendamento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Horario" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Medico" Relationship="SISMed.MedicoAgendamento" FromRole="Agendamento" ToRole="Medico" />
+          <Property Name="MedicoId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Paciente" Relationship="SISMed.PacienteAgendamento" FromRole="Agendamento" ToRole="Paciente" />
+          <Property Name="PacienteId" Type="Int32" Nullable="false" />
+          <Property Type="Boolean" Name="Ativo" Nullable="false" />
+        </EntityType>
+        <Association Name="MedicoAgendamento">
+          <End Type="SISMed.Medico" Role="Medico" Multiplicity="1" />
+          <End Type="SISMed.Agendamento" Role="Agendamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medico">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Agendamento">
+              <PropertyRef Name="MedicoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PacienteAgendamento">
+          <End Type="SISMed.Paciente" Role="Paciente" Multiplicity="1" />
+          <End Type="SISMed.Agendamento" Role="Agendamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paciente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Agendamento">
+              <PropertyRef Name="PacienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SISMedStoreContainer" CdmEntityContainer="SISMedEntities">
+    <EntitySetMapping Name="Solicitacoes">
+      <EntityTypeMapping TypeName="IsTypeOf(SISMed.Solicitacao)">
+        <MappingFragment StoreEntitySet="Solicitacoes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DataHora" ColumnName="DataHora" />
+          <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+          <ScalarProperty Name="Resolvido" ColumnName="Resolvido" />
+          <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pessoas">
+      <EntityTypeMapping TypeName="IsTypeOf(SISMed.Pessoa)">
+        <MappingFragment StoreEntitySet="Pessoas">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Sobrenome" ColumnName="Sobrenome" />
+          <ScalarProperty Name="CPF" ColumnName="CPF" />
+          <ScalarProperty Name="RG" ColumnName="RG" />
+          <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+          <ScalarProperty Name="TelefoneCelular" ColumnName="TelefoneCelular" />
+          <ScalarProperty Name="TelefoneResidencial" ColumnName="TelefoneResidencial" />
+          <ScalarProperty Name="EstadoCivilId" ColumnName="EstadoCivilId" />
+          <ScalarProperty Name="DataNascimento" ColumnName="DataNascimento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(SISMed.Usuario)">
+        <MappingFragment StoreEntitySet="Pessoas_Usuario">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Senha" ColumnName="Senha" />
+          <ScalarProperty Name="TipoDeUsuarioId" ColumnName="TipoDeUsuarioId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(SISMed.Paciente)">
+        <MappingFragment StoreEntitySet="Pessoas_Paciente">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TipoSanguineo" ColumnName="TipoSanguineo" />
+          <ScalarProperty Name="FatorRh" ColumnName="FatorRh" />
+          <ScalarProperty Name="Alergias" ColumnName="Alergias" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Medicos">
+      <EntityTypeMapping TypeName="IsTypeOf(SISMed.Medico)">
+        <MappingFragment StoreEntitySet="Medicos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HorariosDeAtendimento">
+      <EntityTypeMapping TypeName="IsTypeOf(SISMed.HorarioDeAtendimento)">
+        <MappingFragment StoreEntitySet="HorariosDeAtendimento">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="HoraInicio" ColumnName="HoraInicio" />
+          <ScalarProperty Name="HoraFim" ColumnName="HoraFim" />
+          <ScalarProperty Name="MedicoId" ColumnName="MedicoId" />
+          <ScalarProperty Name="DiaDaSemanaId" ColumnName="DiaDaSemanaId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TiposDeUsuario">
+      <EntityTypeMapping TypeName="IsTypeOf(SISMed.TipoDeUsuario)">
+        <MappingFragment StoreEntitySet="TiposDeUsuario">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DiasDaSemana">
+      <EntityTypeMapping TypeName="IsTypeOf(SISMed.DiaDaSemana)">
+        <MappingFragment StoreEntitySet="DiasDaSemana">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EstadosCivis">
+      <EntityTypeMapping TypeName="IsTypeOf(SISMed.EstadoCivil)">
+        <MappingFragment StoreEntitySet="EstadosCivis">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Consultas">
+      <EntityTypeMapping TypeName="IsTypeOf(SISMed.Consulta)">
+        <MappingFragment StoreEntitySet="Consultas">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Queixas" ColumnName="Queixas" />
+          <ScalarProperty Name="Diagnostico" ColumnName="Diagnostico" />
+          <ScalarProperty Name="DataHora" ColumnName="DataHora" />
+          <ScalarProperty Name="MedicoId" ColumnName="MedicoId" />
+          <ScalarProperty Name="PacienteId" ColumnName="PacienteId" />
+          <ScalarProperty Name="Peso" ColumnName="Peso" />
+          <ScalarProperty Name="Altura" ColumnName="Altura" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Medicacoes">
+      <EntityTypeMapping TypeName="IsTypeOf(SISMed.Medicacao)">
+        <MappingFragment StoreEntitySet="Medicacoes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Quantidade" ColumnName="Quantidade" />
+          <ScalarProperty Name="ConsultaId" ColumnName="ConsultaId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Agendamentos">
+      <EntityTypeMapping TypeName="IsTypeOf(SISMed.Agendamento)">
+        <MappingFragment StoreEntitySet="Agendamentos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Horario" ColumnName="Horario" />
+          <ScalarProperty Name="MedicoId" ColumnName="MedicoId" />
+          <ScalarProperty Name="PacienteId" ColumnName="PacienteId" />
+          <ScalarProperty Name="Ativo" ColumnName="Ativo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="MedicoUsuario" TypeName="SISMed.MedicoUsuario" StoreEntitySet="Medicos">
+      <EndProperty Name="Usuario">
+        <ScalarProperty Name="Id" ColumnName="Usuario_Id" />
+      </EndProperty>
+      <EndProperty Name="Medico">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
+        <DesignerProperty Name="DatabaseGenerationWorkflow" Value="$(VSEFTools)\DBGen\TablePerTypeStrategy.xaml" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="SISMed" DisplayType="true" >
+        <EntityTypeShape EntityType="SISMed.Solicitacao" Width="1.5" PointX="0.75" PointY="0.875" Height="1.59568359375" />
+        <EntityTypeShape EntityType="SISMed.Usuario" Width="1.5" PointX="3.5" PointY="0.75" />
+        <EntityTypeShape EntityType="SISMed.Pessoa" Width="1.5" PointX="6.5" PointY="1" />
+        <AssociationConnector Association="SISMed.SolicitacaoUsuario" />
+        <InheritanceConnector EntityType="SISMed.Usuario" >
+          <ConnectorPoint PointX="6.5" PointY="3.9417936197916665" />
+          <ConnectorPoint PointX="5.75" PointY="19.77668726119995" />
+          <ConnectorPoint PointX="5.75" PointY="17.350215366617839" />
+          <ConnectorPoint PointX="5" PointY="2.7302864583333335" />
+        </InheritanceConnector>
+        <EntityTypeShape EntityType="SISMed.Paciente" Width="1.5" PointX="9.25" PointY="1.625" />
+        <InheritanceConnector EntityType="SISMed.Paciente" >
+          <ConnectorPoint PointX="8" PointY="3.9417936197916665" />
+          <ConnectorPoint PointX="8.625" PointY="40.646721154191759" />
+          <ConnectorPoint PointX="8.625" PointY="16.78185150239733" />
+          <ConnectorPoint PointX="9.25" PointY="3.412985026041667" />
+        </InheritanceConnector>
+        <EntityTypeShape EntityType="SISMed.Medico" Width="1.5" PointX="3.75" PointY="3.625" />
+        <EntityTypeShape EntityType="SISMed.HorarioDeAtendimento" Width="1.5" PointX="5.75" PointY="4.375" />
+        <AssociationConnector Association="SISMed.HorarioDeAtendimentoMedico" />
+        <EntityTypeShape EntityType="SISMed.TipoDeUsuario" Width="1.5" PointX="1.5" PointY="3.25" />
+        <AssociationConnector Association="SISMed.TipoDeUsuarioUsuario" ManuallyRouted="true" >
+          <ConnectorPoint PointX="2.65625" PointY="3.25" />
+          <ConnectorPoint PointX="2.65625" PointY="2.09375" />
+          <ConnectorPoint PointX="3.408115625" PointY="2.09375" />
+          <ConnectorPoint PointX="3.408115625" PointY="20.501920414012183" />
+          <ConnectorPoint PointX="3.5" PointY="2.7302864583333331" />
+        </AssociationConnector>
+        <AssociationConnector Association="SISMed.MedicoUsuario" />
+        <EntityTypeShape EntityType="SISMed.DiaDaSemana" Width="1.5" PointX="8.375" PointY="5.5" />
+        <AssociationConnector Association="SISMed.DiaDaSemanaHorarioDeAtendimento" />
+        <EntityTypeShape EntityType="SISMed.EstadoCivil" Width="1.5" PointX="8.75" PointY="3.5" />
+        <AssociationConnector Association="SISMed.PessoaEstadoCivil" >
+          <ConnectorPoint PointX="8" PointY="3.7208968098958333" />
+          <ConnectorPoint PointX="8.75" PointY="3.7208968098958333" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="SISMed.Consulta" Width="1.5" PointX="3" PointY="6.25" Height="2.7494921874999996" />
+        <EntityTypeShape EntityType="SISMed.Medicacao" Width="1.5" PointX="0.875" PointY="5.75" Height="1.5956835937499996" />
+        <AssociationConnector Association="SISMed.ConsultaMedicacao">
+          <ConnectorPoint PointX="3" PointY="6.7401432291666667" />
+          <ConnectorPoint PointX="2.375" PointY="6.7401432291666667" />
+        </AssociationConnector>
+        <AssociationConnector Association="SISMed.MedicoConsulta">
+          <ConnectorPoint PointX="4.125" PointY="5.4129850260416665" />
+          <ConnectorPoint PointX="4.125" PointY="5.75" />
+        </AssociationConnector>
+        <AssociationConnector Association="SISMed.PacienteConsulta">
+          <ConnectorPoint PointX="10.53125" PointY="3.6052864583333331" />
+          <ConnectorPoint PointX="10.53125" PointY="8.078837890625" />
+          <ConnectorPoint PointX="10.473955833333333" PointY="8.078837890625" />
+          <ConnectorPoint PointX="10.307289166666665" PointY="8.078837890625" />
+          <ConnectorPoint PointX="4.989583333333333" PointY="8.078837890625" />
+          <ConnectorPoint PointX="4.822916666666667" PointY="8.078837890625" />
+          <ConnectorPoint PointX="4.5" PointY="8.078837890625" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="SISMed.Agendamento" Width="1.5" PointX="5.5" PointY="9.25" Height="2.3648893229166674" />
+        <AssociationConnector Association="SISMed.MedicoAgendamento" >
+          <ConnectorPoint PointX="4.90625" PointY="5.6052864583333335" />
+          <ConnectorPoint PointX="4.90625" PointY="10.432444661458334" />
+          <ConnectorPoint PointX="5.5" PointY="10.432444661458334" />
+        </AssociationConnector>
+        <AssociationConnector Association="SISMed.PacienteAgendamento" >
+          <ConnectorPoint PointX="10.3906225" PointY="3.6052864583333331" />
+          <ConnectorPoint PointX="10.3906225" PointY="10.432444661458334" />
+          <ConnectorPoint PointX="7" PointY="10.432444661458334" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
