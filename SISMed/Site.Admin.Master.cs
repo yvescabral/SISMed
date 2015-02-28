@@ -11,6 +11,7 @@ namespace SISMed
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            /*
             var userId = Session["UsuarioId"] ?? "";
             var userTypeId = Session["TipoDeUsuarioId"] ?? "";
 
@@ -23,12 +24,16 @@ namespace SISMed
                 if (string.IsNullOrWhiteSpace(userTypeId.ToString()) || userTypeId.ToString() != "4")
                     Response.Redirect(ResolveUrl("~/Dashboard/Default.aspx"));
             }
+            */
         }
 
         protected void btnLogout_Click(object sender, EventArgs e)
         {
+            /*
             Session.Remove("UsuarioId");
             Response.Redirect("/Login/Default.aspx");
+            */
+            System.Web.Security.FormsAuthentication.SignOut();
         }
     }
 }

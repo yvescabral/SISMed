@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
   <siteMapNode url="" title=""  description="">
-    <siteMapNode url="~/Dashboard/Default.aspx" title="Dashboard" userTypeId="1"></siteMapNode>
-    <siteMapNode url="~/Pacientes/Default.aspx" title="Pacientes" userTypeId="1">
+    <siteMapNode url="~/Dashboard/Default.aspx" title="Dashboard" userRole="Atendente"></siteMapNode>
+    <siteMapNode url="~/Pacientes/Default.aspx" title="Pacientes" userRole="Atendente">
       <siteMapNode url="~/Pacientes/New.aspx" title="Novo Usuário"></siteMapNode>
     </siteMapNode>
-    <siteMapNode url="~/Agendamentos/Default.aspx" title="Agendamentos" userTypeId="1"></siteMapNode>
-    <siteMapNode url="~/Consultas/Default.aspx" title="Consultas" userTypeId="2"></siteMapNode>
-    <siteMapNode url="~/Gerenciamento/Default.aspx" title="Gerenciamento" userTypeId="3"></siteMapNode>
+    <siteMapNode url="~/Agendamentos/Default.aspx" title="Agendamentos" userRole="Atendente"></siteMapNode>
+    <siteMapNode url="~/Consultas/Default.aspx" title="Consultas" userRole="Médico"></siteMapNode>
+    <siteMapNode url="~/Gerenciamento/Default.aspx" title="Gerenciamento" userRole="Gestor"></siteMapNode>
   </siteMapNode>
 </siteMap>

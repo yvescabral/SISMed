@@ -85,7 +85,8 @@
     <Content Include="Dashboard\Default.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Gerenciamento\Default.aspx" />
-    <Content Include="Login\Default.aspx" />
+    <Content Include="Login.aspx" />
+    <Content Include="LoginAntigo\Default.aspx" />
     <Content Include="Models\SISMed.edmx.sql" />
     <Content Include="Pacientes\Default.aspx" />
     <Content Include="Pacientes\Edit.aspx" />
@@ -206,11 +207,18 @@
     <Compile Include="Gerenciamento\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Login\Default.aspx.cs">
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LoginAntigo\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Login\Default.aspx.designer.cs">
+    <Compile Include="LoginAntigo\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\SISMed1.Designer.cs">

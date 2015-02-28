@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SISMed.Login {
+namespace SISMed.LoginAntigo {
     
     
     public partial class Default {

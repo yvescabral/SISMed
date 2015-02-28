@@ -24,13 +24,13 @@
     <form id="form1" class="content" runat="server">
         <header class="header">
             <section class="user section">
-                <%= Session["UsuarioNome"] %>
+                <asp:LoginName ID="LoginName1" runat="server" />
                 <asp:HyperLink NavigateUrl="~/Usuario/Default.aspx" runat="server"><i class="action fa fa-pencil-square"></i></asp:HyperLink>
             </section>
             <section class="toolbar section">
                 <menu>
-                    <% if (!string.IsNullOrWhiteSpace(Session["TipoDeUsuarioId"].ToString()) && Session["TipoDeUsuarioId"].ToString() == "4")
-                       { %>
+                    <% //if (!string.IsNullOrWhiteSpace(Session["TipoDeUsuarioId"].ToString()) && Session["TipoDeUsuarioId"].ToString() == "4") {
+                       if(Roles.IsUserInRole("Administrador")) { %>
                     <a class="greener" href="/Administracao/Usuarios/Default.aspx">
                         <span class="icon at-left fa fa-gears"></span>
                         <span class="text">Administração do Sistema</span>
