@@ -19,6 +19,7 @@ namespace SISMed
                 Response.Redirect(ResolveUrl("~/Login/Default.aspx?redirect=" + Request.RawUrl));
             }
             */
+            Clock.Text = DateTime.Now.ToString("h:mm:ss tt");
         }
 
         protected void btnLogout_Click(object sender, EventArgs e)

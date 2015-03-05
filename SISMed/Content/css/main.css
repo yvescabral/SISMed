@@ -215,7 +215,7 @@ h3 .action {
     width: 100%;
 }
 
-.toolbar a {
+.toolbar a , #Relogio {
     padding: 15px 15px;
     color: white;
     margin: 0;
@@ -232,6 +232,11 @@ h3 .action {
 
 .header a.greener {
     background-color: #1DB961;
+}
+
+#Relogio
+{
+    background-color: #BBF240;
 }
 
 .header a.light-green {

@@ -22,6 +22,8 @@
 </head>
 <body>
     <form id="form1" class="content" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server">
+    </asp:ScriptManager>
         <header class="header">
             <section class="user section">
                 <asp:LoginName ID="LoginName1" runat="server" />
@@ -36,7 +38,18 @@
                         <span class="text">Administração do Sistema</span>
                     </a>
                     <% } %>
+                    
                     <div class="align right">
+                    <asp:UpdatePanel ID="Relogio" runat="server" RenderMode="Inline" class="lighter-green" >
+                        <ContentTemplate>
+                            <asp:Timer ID="Timer" runat="server" Interval="1000"></asp:Timer>
+                            <asp:Label ID="Clock" runat="server" Text="00:00:00"></asp:Label>
+                        </ContentTemplate>
+                        <Triggers>
+                            <asp:AsyncPostBackTrigger ControlID="Timer" EventName="Tick">
+                            </asp:AsyncPostBackTrigger>
+                        </Triggers>
+                    </asp:UpdatePanel>
                         <a class="light-green">SISMed</a><asp:LinkButton ID="btnLogout" CssClass="greenish" Text="<span class='text'>Sair</span> <span class='icon fa fa-sign-out'></span>" runat="server" OnClick="btnLogout_Click" /></div>
                 </menu>
             </section>
