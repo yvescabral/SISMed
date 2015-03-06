@@ -25,6 +25,7 @@ namespace SISMed
                     Response.Redirect(ResolveUrl("~/Dashboard/Default.aspx"));
             }
             */
+            Clock.Text = DateTime.Now.ToString("h:mm:ss tt");
         }
 
         protected void btnLogout_Click(object sender, EventArgs e)

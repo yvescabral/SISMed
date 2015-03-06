@@ -42,7 +42,7 @@
                     <div class="align right">
                     <asp:UpdatePanel ID="Relogio" runat="server" RenderMode="Inline" class="lighter-green" >
                         <ContentTemplate>
-                            <asp:Timer ID="Timer" runat="server" Interval="1000"></asp:Timer>
+                            <asp:Timer ID="Timer" runat="server" Interval="250" OnTick="Timer_Tick"></asp:Timer>
                             <asp:Label ID="Clock" runat="server" Text="00:00:00"></asp:Label>
                         </ContentTemplate>
                         <Triggers>

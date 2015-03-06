@@ -22,6 +22,7 @@
 </head>
 <body>
     <form id="form1" class="content" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <header class="header">
             <section class="user section">
                 <%= Session["UsuarioNome"] %>
@@ -34,6 +35,12 @@
                         <span class="text">Voltar ao Sistema</span>
                     </a>
                     <div class="align right">
+                        <asp:UpdatePanel ID="Relogio" runat="server" RenderMode="Inline">
+                            <ContentTemplate>
+                                <asp:Label ID="Clock" runat="server" Text="00:00:00"></asp:Label>
+                                <asp:Timer ID="sTimer" runat="server" Interval="250"></asp:Timer>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
                         <a class="light-green">SISMed</a><asp:LinkButton ID="btnLogout" CssClass="greenish" Text="<span class='text'>Sair</span> <span class='icon fa fa-sign-out'></span>" runat="server" OnClick="btnLogout_Click" /></div>
                 </menu>
             </section>

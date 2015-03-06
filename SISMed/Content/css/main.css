@@ -7,6 +7,19 @@
     vertical-align: baseline;
 }
 
+#Filtro .lista{
+    position: absolute;
+    left: -209px;
+    top: 25px;
+    width: 209px;
+    padding: 2px;
+    margin: 0;
+}
+
+#Filtro {
+    position:relative;
+}
+
 body {
     background: #f6f6f6;
     color: #000;

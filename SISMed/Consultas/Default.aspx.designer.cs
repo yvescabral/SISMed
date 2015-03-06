@@ -49,6 +49,33 @@ namespace SISMed.Consultas {
         protected global::System.Web.UI.WebControls.TextBox txbNome;
         
         /// <summary>
+        /// Filtro control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel Filtro;
+        
+        /// <summary>
+        /// sdsFiltro control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource sdsFiltro;
+        
+        /// <summary>
+        /// listaSugerida control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListBox listaSugerida;
+        
+        /// <summary>
         /// btnFiltrar control.
         /// </summary>
         /// <remarks>

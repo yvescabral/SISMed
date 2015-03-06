@@ -19,7 +19,20 @@
             <asp:TableRow>
                 <asp:TableCell>
                     <asp:Label ID="lblNome" Text="Nome do Paciente: " AssociatedControlID="txbNome" runat="server" />
-                    <asp:TextBox ID="txbNome" runat="server" />
+                    <asp:TextBox ID="txbNome" runat="server" OnTextChanged="txbNome_OnTextChanged" />
+                    <asp:UpdatePanel runat="server" ID="Filtro" RenderMode="Inline" UpdateMode="Conditional" ClientIDMode="Static">
+                        <ContentTemplate>                            
+                            <asp:SqlDataSource runat="server" ID="sdsFiltro" ConnectionString="Data Source=.\SQLEXPRESS;Initial Catalog=SISMed;User ID=sa;Password=senha" ProviderName="System.Data.SqlClient" SelectCommand="SELECT Pessoas.Nome + ' ' + Pessoas.Sobrenome AS Nome, Pessoas.Id As ID FROM Pessoas_Paciente INNER JOIN Pessoas ON Pessoas_Paciente.Id = Pessoas.Id WHERE (Pessoas.Nome+' '+Pessoas.Sobrenome LIKE  '%'+@Pesquisa+'%')">
+                                <SelectParameters>
+                                    <asp:ControlParameter ControlID="txbNome" DbType="String" DefaultValue="null" Name="Pesquisa" PropertyName="Text" />
+                                </SelectParameters>
+                            </asp:SqlDataSource>                    
+                            <asp:ListBox ID="listaSugerida" runat="server" CssClass="lista" Visible="False" DataSourceID="sdsFiltro" DataTextField="Nome" DataValueField="ID"></asp:ListBox>
+                        </ContentTemplate>
+                        <Triggers>
+                            <asp:AsyncPostBackTrigger ControlID="txbNome" EventName="TextChanged" />
+                        </Triggers>
+                    </asp:UpdatePanel>
                     <asp:Button ID="btnFiltrar" Text="Filtrar" runat="server" />
                 </asp:TableCell>
              </asp:TableRow>
