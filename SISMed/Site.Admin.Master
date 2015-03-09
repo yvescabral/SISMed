@@ -25,7 +25,7 @@
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <header class="header">
             <section class="user section">
-                <%= Session["UsuarioNome"] %>
+                <asp:LoginName ID="LoginName1" runat="server"></asp:LoginName>
                 <asp:HyperLink NavigateUrl="~/Usuario/Default.aspx" runat="server"><i class="action fa fa-pencil-square"></i></asp:HyperLink>
             </section>
             <section class="toolbar section">

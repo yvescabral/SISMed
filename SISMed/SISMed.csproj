@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Administracao\Solicitacoes\Default.aspx" />
+    <Content Include="Administracao\Usuarios\Copy of New.aspx" />
     <Content Include="Administracao\Usuarios\Default.aspx" />
     <Content Include="Administracao\Usuarios\Edit.aspx" />
     <Content Include="Administracao\Usuarios\New.aspx" />
@@ -107,6 +108,13 @@
     </Compile>
     <Compile Include="Administracao\Solicitacoes\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administracao\Usuarios\Copy of New.aspx.cs">
+      <DependentUpon>Copy of New.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administracao\Usuarios\Copy of New.aspx.designer.cs">
+      <DependentUpon>Copy of New.aspx</DependentUpon>
     </Compile>
     <Compile Include="Administracao\Usuarios\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
