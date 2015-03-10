@@ -14,7 +14,7 @@
         </asp:EntityDataSource>
 
         <asp:HyperLink NavigateUrl="~/Pacientes/New.aspx" Text="Novo Paciente" CssClass="button green" runat="server" />
-                                    
+
         <asp:Table ID="tblFiltros" CssClass="filter table" runat="server">
             <asp:TableRow>                
                 <asp:TableCell>
@@ -22,12 +22,12 @@
                     <asp:TextBox ID="txbNome" runat="server" OnTextChanged="txbNome_OnTextChanged" />
                     <asp:UpdatePanel runat="server" ID="Filtro" RenderMode="Inline" UpdateMode="Conditional" ClientIDMode="Static">
                         <ContentTemplate>                            
-                            <asp:SqlDataSource runat="server" ID="sdsFiltro" ConnectionString="Data Source=.\SQLEXPRESS;Initial Catalog=SISMed;User ID=sa;Password=senha" ProviderName="System.Data.SqlClient" SelectCommand="SELECT Pessoas.Nome + ' ' + Pessoas.Sobrenome AS Nome, Pessoas.Id As ID FROM Pessoas_Paciente INNER JOIN Pessoas ON Pessoas_Paciente.Id = Pessoas.Id WHERE (Pessoas.Nome+' '+Pessoas.Sobrenome LIKE  '%'+@Pesquisa+'%')">
+                            <asp:SqlDataSource runat="server" ID="sdsFiltro" ConnectionString="Data Source=.;Initial Catalog=SISMed;User ID=sa;Password=senha" ProviderName="System.Data.SqlClient" SelectCommand="SELECT Pessoas.Nome + ' ' + Pessoas.Sobrenome AS Nome, Pessoas.Id As ID FROM Pessoas_Paciente INNER JOIN Pessoas ON Pessoas_Paciente.Id = Pessoas.Id WHERE (Pessoas.Nome+' '+Pessoas.Sobrenome LIKE  '%'+@Pesquisa+'%') UNION SELECT 'Pacientes :' AS NOME,-1 AS ID">
                                 <SelectParameters>
                                     <asp:ControlParameter ControlID="txbNome" DbType="String" DefaultValue="null" Name="Pesquisa" PropertyName="Text" />
                                 </SelectParameters>
                             </asp:SqlDataSource>                    
-                            <asp:ListBox ID="listaSugerida" runat="server" CssClass="lista" Visible="False" DataSourceID="sdsFiltro" DataTextField="Nome" DataValueField="ID"></asp:ListBox>
+                            <asp:ListBox ID="listaSugerida" runat="server" CssClass="lista" Visible="False" DataSourceID="sdsFiltro" DataTextField="Nome" DataValueField="ID" OnSelectedIndexChanged="listaSugerida_SelectedIndexChanged"></asp:ListBox>
                         </ContentTemplate>
                         <Triggers>
                             <asp:AsyncPostBackTrigger ControlID="txbNome" EventName="TextChanged" />
@@ -57,11 +57,13 @@
                             <i class="action fa fa-edit"></i>
                         </a>
                         <%// if (!string.IsNullOrWhiteSpace(Session["TipoDeUsuarioId"].ToString()) && int.Parse(Session["TipoDeUsuarioId"].ToString()) >= 3)
-                           //{ %>
+                           //{ 
+                            %>
                         <a href='<%# Eval("Id", "../consultas/new.aspx?paciente={0}") %>' title="Cadastrar consulta">
                             <i class="action fa fa-medkit"></i>
                         </a>
-                        <%// } %>
+                        <%// } 
+                        %>
                         <asp:LinkButton ID="DeleteButton" runat="server" CausesValidation="True"
                             CommandName="Delete" ToolTip="Remover paciente" Text="<i class='action fa fa-times'></i>" />
                     </ItemTemplate>

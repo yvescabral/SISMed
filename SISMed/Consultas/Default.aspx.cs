@@ -17,9 +17,9 @@ namespace SISMed.Consultas
         protected void txbNome_OnTextChanged(object sender, EventArgs e)
         {
             TextBox txb = (TextBox)sender;
-            sdsFiltro.DataBind();            
+            sdsFiltro.DataBind();
             listaSugerida.DataBind();
-            if (listaSugerida.Items.Count > 0)
+            if (listaSugerida.Items.Count > 1)
             {
                 listaSugerida.Visible = true;
                 listaSugerida.Rows = listaSugerida.Items.Count > 5 ? 5 : listaSugerida.Items.Count;
@@ -29,6 +29,15 @@ namespace SISMed.Consultas
                 listaSugerida.Visible = false;
             }
             Filtro.Update();
+        }
+
+        protected void listaSugerida_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ListBox lista = (ListBox) sender;
+            if (lista.SelectedValue != "-1")
+            {
+                Response.Redirect("~/Consultas/Show.aspx?id="+lista.SelectedValue);
+            }
         }
     }
 }

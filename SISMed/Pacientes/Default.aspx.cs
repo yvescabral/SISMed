@@ -19,7 +19,7 @@ namespace SISMed.Pacientes
             TextBox txb = (TextBox)sender;
             sdsFiltro.DataBind();
             listaSugerida.DataBind();
-            if (listaSugerida.Items.Count > 0)
+            if (listaSugerida.Items.Count > 1)
             {
                 listaSugerida.Visible = true;
                 listaSugerida.Rows = listaSugerida.Items.Count > 5 ? 5 : listaSugerida.Items.Count;
@@ -31,6 +31,12 @@ namespace SISMed.Pacientes
             Filtro.Update();
         }
 
+        protected void listaSugerida_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ListBox lista = (ListBox) sender;
+            if(lista.SelectedValue != "-1")
+                Response.Redirect("~/Pacientes/show.aspx?id="+lista.SelectedValue);
+        }
         
     }
 }

@@ -22,12 +22,12 @@
                     <asp:TextBox ID="txbNome" runat="server" OnTextChanged="txbNome_OnTextChanged" />
                     <asp:UpdatePanel runat="server" ID="Filtro" RenderMode="Inline" UpdateMode="Conditional" ClientIDMode="Static">
                         <ContentTemplate>                            
-                            <asp:SqlDataSource runat="server" ID="sdsFiltro" ConnectionString="Data Source=.\SQLEXPRESS;Initial Catalog=SISMed;User ID=sa;Password=senha" ProviderName="System.Data.SqlClient" SelectCommand="SELECT Pessoas.Nome + ' ' + Pessoas.Sobrenome AS Nome, Pessoas.Id As ID FROM Pessoas_Paciente INNER JOIN Pessoas ON Pessoas_Paciente.Id = Pessoas.Id WHERE (Pessoas.Nome+' '+Pessoas.Sobrenome LIKE  '%'+@Pesquisa+'%')">
+                            <asp:SqlDataSource runat="server" ID="sdsFiltro" ConnectionString="Data Source=.;Initial Catalog=SISMed;User ID=sa;Password=senha" ProviderName="System.Data.SqlClient" SelectCommand="SELECT Pessoas.Nome + ' ' + Pessoas.Sobrenome AS Nome, Consultas.Id As ID FROM Consultas INNER JOIN Pessoas_Paciente ON Consultas.PacienteId = Pessoas_Paciente.Id INNER JOIN Pessoas ON Pessoas_Paciente.Id = Pessoas.Id WHERE (Pessoas.Nome+' '+Pessoas.Sobrenome LIKE  '%'+@Pesquisa+'%') UNION SELECT 'Consultas :' AS NOME,-1 AS ID">
                                 <SelectParameters>
                                     <asp:ControlParameter ControlID="txbNome" DbType="String" DefaultValue="null" Name="Pesquisa" PropertyName="Text" />
                                 </SelectParameters>
                             </asp:SqlDataSource>                    
-                            <asp:ListBox ID="listaSugerida" runat="server" CssClass="lista" Visible="False" DataSourceID="sdsFiltro" DataTextField="Nome" DataValueField="ID"></asp:ListBox>
+                            <asp:ListBox ID="listaSugerida" runat="server" CssClass="lista" Visible="False" DataSourceID="sdsFiltro" DataTextField="Nome" DataValueField="ID" OnSelectedIndexChanged="listaSugerida_SelectedIndexChanged"></asp:ListBox>
                         </ContentTemplate>
                         <Triggers>
                             <asp:AsyncPostBackTrigger ControlID="txbNome" EventName="TextChanged" />
